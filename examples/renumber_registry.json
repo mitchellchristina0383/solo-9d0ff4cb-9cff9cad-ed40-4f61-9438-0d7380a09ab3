@@ -1,0 +1,7 @@
+{
+  "pool": "10.0.0.0/28",
+  "links": [
+    {"link_id": "L1", "endpoint_a": "R1", "endpoint_b": "R2", "addr_a": "10.0.0.0", "addr_b": "10.0.0.1"},
+    {"link_id": "L2", "endpoint_a": "R3", "endpoint_b": "R4", "addr_a": "10.0.0.2", "addr_b": "10.0.0.3"}
+  ]
+}

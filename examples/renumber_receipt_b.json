@@ -1,0 +1,5 @@
+{
+  "endpoint": "b",
+  "removed_addr": "10.0.0.1",
+  "activated_addr": "10.0.0.5"
+}

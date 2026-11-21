@@ -7,16 +7,21 @@ from fastapi.responses import RedirectResponse
 
 from .core import collect_nodes, is_connected, run_precheck
 from .models import PrecheckRequest, PrecheckResponse
+from .renumber.api import router as renumber_router
 
 app = FastAPI(
-    title="链路代价分批调整离线预检",
-    version="1.0.0",
+    title="链路代价分批调整离线预检 / IPv4 换号工单",
+    version="1.1.0",
     description=(
-        "提交连通路由拓扑、每条双向链路的新旧正整数代价、目标路由器与覆盖所有"
+        "1) 提交连通路由拓扑、每条双向链路的新旧正整数代价、目标路由器与覆盖所有"
         "路由器的分批计划，逐批判断错峰切换过程中是否可能出现转发环路。"
-        "等价最短路径的所有下一跳均视为可能被选中。"
+        "等价最短路径的所有下一跳均视为可能被选中。\n\n"
+        "2) IPv4 点对点链路 /31 换号工单：预登记地址池与链路现用地址，"
+        "凭工单号领取空闲 /31，两端分别回报新旧地址，双端确认后才更新台账并释放旧网段。"
     ),
 )
+
+app.include_router(renumber_router)
 
 
 @app.get("/", include_in_schema=False)
